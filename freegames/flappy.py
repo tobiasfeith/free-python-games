@@ -10,16 +10,18 @@ Exercises
 
 from random import *
 from turtle import *
+from time import *
 
 from freegames import vector
 
 bird = vector(0, 0)
 balls = []
+start = time()
 
 
 def tap(x, y):
     """Move bird up in response to screen tap."""
-    up = vector(0, 10)
+    up = vector(0, 30)
     bird.move(up)
 
 
@@ -43,7 +45,16 @@ def draw(alive):
         goto(ball.x, ball.y)
         dot(20, 'black')
 
+    goto(-199, 190)
+    write("Level: " + str(level()))
+
     update()
+
+
+def level():
+    now = time()
+    level = round((now - start) / 10)
+    return level
 
 
 def move():
@@ -71,7 +82,7 @@ def move():
             return
 
     draw(True)
-    ontimer(move, 50)
+    ontimer(move, (50 - level()))
 
 
 setup(420, 420, 370, 0)
