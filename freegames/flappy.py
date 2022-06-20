@@ -10,16 +10,19 @@ Exercises
 
 from random import *
 from turtle import *
+from time import *
 
 from freegames import vector
 
 bird = vector(0, 0)
 balls = []
+passed_balls = 0
+start = time()
 
 
 def tap(x, y):
     """Move bird up in response to screen tap."""
-    up = vector(0, 10)
+    up = vector(0, 30)
     bird.move(up)
 
 
@@ -43,7 +46,19 @@ def draw(alive):
         goto(ball.x, ball.y)
         dot(20, 'black')
 
+    goto(-199, -199)
+    write("Score: " + str(passed_balls))
+
+    goto(-199, 190)
+    write("Level: " + str(level()))
+
     update()
+
+
+def level():
+    now = time()
+    level = round((now - start) / 10)
+    return level
 
 
 def move():
@@ -60,6 +75,8 @@ def move():
 
     while len(balls) > 0 and not inside(balls[0]):
         balls.pop(0)
+        global passed_balls
+        passed_balls += 1
 
     if not inside(bird):
         draw(False)
