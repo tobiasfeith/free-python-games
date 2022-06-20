@@ -15,11 +15,12 @@ from freegames import vector
 
 bird = vector(0, 0)
 balls = []
+ x = 0
 
 
 def tap(x, y):
     """Move bird up in response to screen tap."""
-    up = vector(0, 10)
+    up = vector(0, 30)
     bird.move(up)
 
 
@@ -43,6 +44,9 @@ def draw(alive):
         goto(ball.x, ball.y)
         dot(20, 'black')
 
+    goto(-199, -199)
+    write("Scor: " + x)
+
     update()
 
 
@@ -60,6 +64,8 @@ def move():
 
     while len(balls) > 0 and not inside(balls[0]):
         balls.pop(0)
+        global x
+        x += 1
 
     if not inside(bird):
         draw(False)
