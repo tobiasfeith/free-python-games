@@ -19,7 +19,7 @@ balls = []
 
 def tap(x, y):
     """Move bird up in response to screen tap."""
-    up = vector(0, 30)
+    up = vector(0, 10)
     bird.move(up)
 
 
